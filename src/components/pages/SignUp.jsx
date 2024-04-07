@@ -12,11 +12,11 @@ const SignUp = () => {
         const data = Object.fromEntries(formData);
         console.log(data);
 
-        axios.post(`${import.meta.env.VITE_SERVER}/users/create`, data)
+        axios.post(`${import.meta.env.VITE_SERVER}/users/auth/signup`, data)
             .then((response) => {
                 console.log(response);
                 if (response.status === 201) {
-                    toast.success('Sign up successful');
+                    toast.success(response.data.message);
                     navigate('/login');
                 }
             })

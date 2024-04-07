@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 const Home = () => {
     const handleSignUp = (e) => {
@@ -6,6 +8,18 @@ const Home = () => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         console.log(data);
+
+        axios.post(`${import.meta.env.VITE_SERVER}/users/create`, data)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 201) {
+                    toast.success('Sign up successful');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error('Sign up failed');
+            });
     }
 
     return (

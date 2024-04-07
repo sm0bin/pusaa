@@ -8,6 +8,8 @@ import "./index.css";
 import App from "./App";
 import ErrorPage from "./components/pages/ErrorPage";
 import Home from "./components/pages/Home";
+import { Toaster } from "react-hot-toast";
+import ProfileForm from "./components/pages/ProfileForm";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +21,17 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/profile",
+        element: <ProfileForm />,
+      }
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Toaster />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

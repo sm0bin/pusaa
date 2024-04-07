@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const handleSignUp = () => {
+const SignUp = () => {
+    const navigate = useNavigate();
+
     const handleSignUp = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -14,6 +17,7 @@ const handleSignUp = () => {
                 console.log(response);
                 if (response.status === 201) {
                     toast.success('Sign up successful');
+                    navigate('/login');
                 }
             })
             .catch((error) => {
@@ -55,4 +59,4 @@ const handleSignUp = () => {
     );
 };
 
-export default handleSignUp;
+export default SignUp;

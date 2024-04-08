@@ -13,6 +13,8 @@ import ProfileForm from "./components/pages/ProfileForm";
 import Profile from "./components/pages/Profile";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
+import ForgotPassword from "./components/pages/ForgotPassword";
+import ResetPassword from "./components/pages/ResetPassword";
 
 
 const router = createBrowserRouter([
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: "/profile/new",
         element: <ProfileForm />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reset-password/:token",
+        element: <ResetPassword />,
       }
     ],
   },

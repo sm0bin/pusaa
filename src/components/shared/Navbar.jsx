@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
@@ -17,6 +19,21 @@ const Navbar = () => {
                 </li>
             );
         });
+    }
+
+    const handleLogout = () => {
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/logout`, { withCredentials: true })
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    console.log('Logged out');
+                    toast.success(response.data.message);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error('Logout failed');
+            });
     }
     return (
         <div className="fixed top-0 navbar bg-base-100">
@@ -37,7 +54,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <NavLink to='/login' className='btn btn-primary'>Login</NavLink>
+                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
+
             </div>
         </div>
     );

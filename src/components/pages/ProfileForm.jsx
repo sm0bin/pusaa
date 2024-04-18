@@ -55,7 +55,66 @@ const ProfileForm = () => {
 
     const sessions = ['2010-2011', '2011-2012', '2012-2013', '2013-2014', '2014-2015', '2015-2016', '2016-2017', '2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024', '2024-2025']
 
-    const universities = ['University of Dhaka', 'Bangladesh University of Engineering and Technology', 'Jahangirnagar University', 'University of Chittagong', 'Rajshahi University', 'Khulna University', 'Islamic University', 'Jagannath University', 'Comilla University', 'Barishal University', 'Begum Rokeya University', 'Bangabandhu Sheikh Mujibur Rahman Science and Technology University', 'Bangabandhu Sheikh Mujibur Rahman Agricultural University', 'Sher-e-Bangla Agricultural University', 'Sylhet Agricultural University', 'Hajee Mohammad Danesh Science and Technology University', 'Mawlana Bhashani Science and Technology University', 'Noakhali Science and Technology University', 'Pabna University of Science and Technology', 'Patuakhali Science and Technology University', 'Shahjalal University of Science and Technology', 'Jessore University of Science and Technology', 'Hajee Mohammad Danesh Science and Technology University', 'Bangladesh University of Professionals', 'Bangladesh Agricultural University', 'Chittagong Veterinary and Animal Sciences University', 'Dhaka University of Engineering and Technology', 'Bangabandhu Sheikh Mujibur Rahman Maritime University', 'Bangabandhu Sheikh Mujibur Rahman Aviation and Aerospace University', 'Bangabandhu Sheikh Mujibur Rahman Digital University', 'Bangabandhu Sheikh Mujibur Rahman Medical University', 'Bangabandhu Sheikh Mujibur Rahman Science and Technology University', 'Bangabandhu Sheikh Mujibur Rahman University'];
+    const universities =
+        [
+            "University of Dhaka",
+            "University of Rajshahi",
+            "Bangladesh Agricultural University",
+            "Bangladesh University of Engineering & Technology",
+            "University of Chittagong",
+            "Jahangirnagar University",
+            "Islamic University, Bangladesh",
+            "Shahjalal University of Science & Technology",
+            "Khulna University",
+            "National University",
+            "Bangladesh Open University",
+            "Bangabandhu Sheikh Mujib Medical University",
+            "Bangabandhu Sheikh Mujibur Rahman Agricultural University",
+            "Hajee Mohammad Danesh Science & Technology University",
+            "Mawlana Bhashani Science & Technology University",
+            "Patuakhali Science And Technology University",
+            "Sher-e-Bangla Agricultural University",
+            "Chittagong University of Engineering & Technology",
+            "Rajshahi University of Engineering & Technology",
+            "Khulna University of Engineering & Technology",
+            "Dhaka University of Engineering & Technology",
+            "Noakhali Science & Technology University",
+            "Jagannath University",
+            "Comilla University",
+            "Jatiya Kabi Kazi Nazrul Islam University",
+            "Chittagong Veterinary and Animal Sciences University",
+            "Sylhet Agricultural University",
+            "Jessore University of Science & Technology",
+            "Pabna University of Science and Technology",
+            "Begum Rokeya University, Rangpur",
+            "Bangladesh University of Professionals",
+            "Bangabandhu Sheikh Mujibur Rahman Science & Technology University",
+            "Bangladesh University of Textiles",
+            "University of Barishal",
+            "Rangamati Science and Technology University",
+            "Bangabandhu Sheikh Mujibur Rahman Maritime University, Bangladesh",
+            "Islamic Arabic University",
+            "Chittagong Medical University",
+            "Rajshahi Medical University",
+            "Rabindra University, Bangladesh",
+            "Bangabandhu Sheikh Mujibur Rahman Digital University, Bangladesh",
+            "Sheikh Hasina University",
+            "Khulna Agricultural University",
+            "Bangamata Sheikh Fojilatunnesa Mujib Science and Technology University",
+            "Bangamata Sheikh Fazilatunessa Mujib Medical University, Sylhet",
+            "Bangabandhu Sheikh Mujibur Rahman Aviation And Aerospace University (BSMRAAU)",
+            "Chandpur Science and Technology University",
+            "Bangabandhu Sheikh Mujibur Rahman University, Kishoreganj",
+            "Hobiganj Agricultural University",
+            "Sheikh Hasina Medical University, Khulna",
+            "Kurigram Agricultural University",
+            "Sunamganj Science and Technology University",
+            "Bangabandhu Sheikh Mujibur Rahman Science & Technology University, Pirojpur",
+            "Bangabandhu Sheikh Mujibur Rahman University, Naogaon",
+            "Mujibnagar University, Meherpur"
+        ]
+
+        ;
 
     const departments = [
         // Engineering and Technology
@@ -133,7 +192,8 @@ const ProfileForm = () => {
         'Educational Psychology',
         'Curriculum and Instruction',
         'Educational Leadership',
-        'Special Education'
+        'Special Education',
+        'Others'
     ];
 
     const roles = ['Member', 'President', 'Vice President', 'General Secretary', 'Joint Secretary', 'Treasurer', 'Organizing Secretary', 'Office Secretary', 'Publication Secretary', 'Cultural Secretary', 'Sports Secretary', 'Science and Technology Secretary', 'Social Welfare Secretary', 'Debate Secretary', 'Recruitment Secretary', 'Public Relations Secretary', 'Alumni Secretary', 'Advisor', 'Patron'];
@@ -154,7 +214,7 @@ const ProfileForm = () => {
                     </label>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Full Name</span>
+                            <span className="label-text">Full Name*</span>
                         </label>
                         <input type="text" name="fullName" placeholder="Full Name" className="input input-bordered" required />
                     </div>
@@ -166,7 +226,7 @@ const ProfileForm = () => {
                 </div> */}
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Role</span>
+                            <span className="label-text">Role*</span>
                         </label>
                         <select type="text" name='role' className="select select-bordered" required>
                             {
@@ -186,7 +246,7 @@ const ProfileForm = () => {
                     </label>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">University</span>
+                            <span className="label-text">University*</span>
                         </label>
                         {/* <input type="text" name="university" placeholder="University" className="input input-bordered" /> */}
                         <select type="text" name='university' className="select select-bordered" required>
@@ -199,7 +259,7 @@ const ProfileForm = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Department</span>
+                            <span className="label-text">Department*</span>
                         </label>
                         {/* <input type="text" name="department" placeholder="Department" className="input input-bordered" /> */}
                         <select type="text" name='department' className="select select-bordered" required>
@@ -212,7 +272,7 @@ const ProfileForm = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Session</span>
+                            <span className="label-text">Session*</span>
                         </label>
                         {/* <input type="text" name="session" placeholder="Session" className="input input-bordered" /> */}
                         <select type="text" name='session' className="select select-bordered" required>
@@ -232,14 +292,14 @@ const ProfileForm = () => {
                     </label>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Phone</span>
+                            <span className="label-text">Phone*</span>
                         </label>
-                        <input type="text" name="phone" placeholder="Phone" className="input input-bordered" />
+                        <input type="text" name="phone" placeholder="Phone" className="input input-bordered" required />
                     </div>
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text">Email*</span>
                         </label>
                         <input type="email" name="email" placeholder="Email" className="input input-bordered" required />
                     </div>
@@ -263,7 +323,7 @@ const ProfileForm = () => {
                     </label>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Facebook</span>
+                            <span className="label-text">Facebook*</span>
                         </label>
                         <input type="text" name="fb" placeholder="Facebook" className="input input-bordered" required />
                     </div>
@@ -273,6 +333,13 @@ const ProfileForm = () => {
                         </label>
                         <input type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" />
                     </div>
+                </div>
+
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Note: You must need to provide the star marked information. Among your contact information only your Email and LinkedIn will be publicly visible.</span>
+                    </label>
+                    {/* <input type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" /> */}
                 </div>
 
 

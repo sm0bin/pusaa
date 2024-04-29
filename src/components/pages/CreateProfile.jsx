@@ -364,7 +364,7 @@ const CreateProfile = () => {
                         <label className="label">
                             <span className="label-text">Facebook*</span>
                         </label>
-                        <input type="text" name="fb" placeholder="Facebook" className="input input-bordered" required />
+                        <input type="text" name="facebook" placeholder="Facebook" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">

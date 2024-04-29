@@ -35,11 +35,11 @@ const Profile = () => {
 
                             <p className='text-lg'>Email: {profile.contact.email}</p>
                             <p className='text-lg'>Phone: {profile.contact.phone}</p>
-                            <p className='text-lg'>Address: {profile.contact.address}</p>
                             <p className='text-lg'>Whatsapp: {profile.contact.whatsapp}</p>
+                            <p className='text-lg'>Address: {profile.contact.address}</p>
 
-                            <p className='text-lg'>Facebook: {profile.social.facebook}</p>
-                            <p className='text-lg'>Linkedin: {profile.social.linkedin}</p>
+                            <p className='text-lg'>Facebook: <a className='link link-info link-hover' href={profile.social.facebook} target='_blank'>{profile.social.facebook}</a></p>
+                            <p className='text-lg'>Linkedin: <a className='link link-info link-hover' href={profile.social.linkedin} target='_blank'>{profile.social.linkedin}</a></p>
                         </div>
 
                         <Link to='/profile/edit' className='btn btn-primary mt-4'>Edit Profile</Link>

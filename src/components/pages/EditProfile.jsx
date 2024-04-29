@@ -1,61 +1,25 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    // profile: {
-    //         name: {
-    //             type: String,
-    //            : false
-    //         },
-    //         picture: {
-    //             type: String,
-    //             default: ""
-    //         },
-    //         university: {
-    //             type: String,
-    //             default: ""
-    //         },
-    //         dept: {
-    //             type: String,
-    //             default: ""
-    //         },
-    //         session: {
-    //             type: String,
-    //             default: ""
-    //         },
-    //         contact: {
-    //             phone: {
-    //                 type: String,
-    //                 default: ""
-    //             },
-    //             email: {
-    //                 type: String,
-    //                 default: ""
-    //             },
-    //             whatsapp: {
-    //                 type: String,
-    //                 default: ""
-    //             },
-    //             address: {
-    //                 type: String,
-    //                 default: ""
-    //             }
-    //         },
-    //         social: {
-    //             fb: {
-    //                 type: String,
-    //                 default: ""
-    //             },
-    //             linkedin: {
-    //                 type: String,
-    //                 default: ""
-    //             }
-    //         }
-    //     },
-    // }
+    const [profile, setProfile] = useState(null);
+
+
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+            .then((res) => {
+                console.log(res.data.user.profile);
+                if (res.status === 200) {
+                    setProfile(res.data.user.profile);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
     const sessions = ['2010-2011', '2011-2012', '2012-2013', '2013-2014', '2014-2015', '2015-2016', '2016-2017', '2017-2018', '2018-2019', '2019-2020', '2020-2021', '2021-2022', '2022-2023', '2023-2024', '2024-2025']
 
@@ -231,10 +195,10 @@ const EditProfile = () => {
         };
 
         axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    toast.success(response.data.message);
+            .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                    toast.success(res.data.message);
                     navigate('/profile');
                 }
             })
@@ -255,13 +219,13 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">Full Name*</span>
                         </label>
-                        <input type="text" name="name" placeholder="Full Name" className="input input-bordered" required />
+                        <input defaultValue={profile?.basic?.name} type="text" name="name" placeholder="Full Name" className="input input-bordered" required />
                     </div>
                     {/* <div className="form-control">
                     <label className="label">
                         <span className="label-text">Picture</span>
                     </label>
-                    <input type="file" name="picture" placeholder="Picture" className="input input-bordered" />
+                    <input defaultValue={profile?.basic?.name} type="file" name="picture" placeholder="Picture" className="input input-bordered" />
                 </div> */}
                     <div className="form-control">
                         <label className="label">
@@ -287,7 +251,7 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">University*</span>
                         </label>
-                        {/* <input type="text" name="university" placeholder="University" className="input input-bordered" /> */}
+                        {/* <input defaultValue={profile?.basic?.name} type="text" name="university" placeholder="University" className="input input-bordered" /> */}
                         <select type="text" name='university' className="select select-bordered" required>
                             {
                                 universities.map((university, index) => {
@@ -300,7 +264,7 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">Department*</span>
                         </label>
-                        {/* <input type="text" name="department" placeholder="Department" className="input input-bordered" /> */}
+                        {/* <input defaultValue={profile?.basic?.name} type="text" name="department" placeholder="Department" className="input input-bordered" /> */}
                         <select type="text" name='department' className="select select-bordered" required>
                             {
                                 departments.map((department, index) => {
@@ -313,7 +277,7 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">Session*</span>
                         </label>
-                        {/* <input type="text" name="session" placeholder="Session" className="input input-bordered" /> */}
+                        {/* <input defaultValue={profile?.basic?.name} type="text" name="session" placeholder="Session" className="input input-bordered" /> */}
                         <select type="text" name='session' className="select select-bordered" required>
                             {
                                 sessions.map((session, index) => {
@@ -333,26 +297,26 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">Phone*</span>
                         </label>
-                        <input type="text" name="phone" placeholder="Phone" className="input input-bordered" required />
+                        <input defaultValue={profile?.contact?.phone} type="text" name="phone" placeholder="Phone" className="input input-bordered" required />
                     </div>
 
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email*</span>
                         </label>
-                        <input type="email" name="email" placeholder="Email" className="input input-bordered" required />
+                        <input defaultValue={profile?.contact?.email} type="email" name="email" placeholder="Email" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Whatsapp</span>
                         </label>
-                        <input type="text" name="whatsapp" placeholder="Whatsapp" className="input input-bordered" />
+                        <input defaultValue={profile?.contact?.whatsapp} type="text" name="whatsapp" placeholder="Whatsapp" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Address</span>
                         </label>
-                        <input type="text" name="address" placeholder="Address" className="input input-bordered" />
+                        <input defaultValue={profile?.contact?.address} type="text" name="address" placeholder="Address" className="input input-bordered" />
                     </div>
                 </div>
 
@@ -364,13 +328,13 @@ const EditProfile = () => {
                         <label className="label">
                             <span className="label-text">Facebook*</span>
                         </label>
-                        <input type="text" name="fb" placeholder="Facebook" className="input input-bordered" required />
+                        <input defaultValue={profile?.social?.facebook} type="text" name="facebook" placeholder="Facebook" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">LinkedIn</span>
                         </label>
-                        <input type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" />
+                        <input defaultValue={profile?.social?.linkedin} type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" />
                     </div>
                 </div>
 
@@ -378,7 +342,7 @@ const EditProfile = () => {
                     <label className="label">
                         <span className="label-text">Note: You must need to provide the star marked information. Among your contact information only your Email and LinkedIn will be publicly visible.</span>
                     </label>
-                    {/* <input type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" /> */}
+                    {/* <input defaultValue={profile?.basic?.name} type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" /> */}
                 </div>
 
 

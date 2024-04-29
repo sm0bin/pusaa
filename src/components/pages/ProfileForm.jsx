@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 
 const ProfileForm = () => {
@@ -203,6 +204,19 @@ const ProfileForm = () => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         console.log(data);
+
+        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, data, { withCredentials: true })
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    toast.success(response.data.message);
+                    navigate('/profile');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err.message);
+            });
     }
 
     return (

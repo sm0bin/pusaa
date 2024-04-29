@@ -21,9 +21,9 @@ const Login = () => {
                     navigate('/');
                 }
             })
-            .catch((error) => {
-                console.error(error);
-                toast.error('Sign up failed');
+            .catch((err) => {
+                console.error(err);
+                toast.error(err.message);
             });
     }
 

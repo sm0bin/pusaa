@@ -6,11 +6,11 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile/me`)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    setProfile(response.data);
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+            .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                    setProfile(res.data.user.profile);
                 }
             })
             .catch((error) => {
@@ -19,14 +19,11 @@ const Profile = () => {
     }, []);
 
     return (
-        <div>
+        <div className='h-screen w-full flex justify-center items-center'>
             {
                 profile ? (
                     <div>
-                        <h1>Profile</h1>
-                        <p>{profile.email}</p>
-                        <p>{profile.name}</p>
-                        <p>{profile.role}</p>
+                        <h1>{profile.email}</h1>
                     </div>
                 ) : (
                     <Link to='/profile/new' className='btn btn-primary'>Create Profile</Link>

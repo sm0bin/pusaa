@@ -9,12 +9,13 @@ import App from "./App";
 import ErrorPage from "./components/pages/ErrorPage";
 import Home from "./components/pages/Home";
 import { Toaster } from "react-hot-toast";
-import ProfileForm from "./components/pages/ProfileForm";
+import CreateProfile from "./components/pages/CreateProfile";
 import Profile from "./components/pages/Profile";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import ForgotPassword from "./components/pages/ForgotPassword";
 import ResetPassword from "./components/pages/ResetPassword";
+import EditProfile from "./components/pages/EditProfile";
 
 
 const router = createBrowserRouter([
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile/new",
-        element: <ProfileForm />,
+        element: <CreateProfile />,
+      },
+      {
+        path: "/profile/edit",
+        element: <EditProfile />,
       },
       {
         path: "/forgot-password",

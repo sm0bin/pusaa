@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const ProfileForm = () => {
+const EditProfile = () => {
+    const navigate = useNavigate();
     // profile: {
     //         name: {
     //             type: String,
@@ -205,7 +208,29 @@ const ProfileForm = () => {
         const data = Object.fromEntries(formData);
         console.log(data);
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, data, { withCredentials: true })
+        const profile = {
+            basic: {
+                name: data.name,
+                role: data.role
+            },
+            education: {
+                university: data.university,
+                department: data.department,
+                session: data.session
+            },
+            contact: {
+                phone: data.phone,
+                email: data.email,
+                whatsapp: data.whatsapp,
+                address: data.address
+            },
+            social: {
+                facebook: data.facebook,
+                linkedin: data.linkedin
+            }
+        };
+
+        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
@@ -220,7 +245,7 @@ const ProfileForm = () => {
     }
 
     return (
-        <div className='max-w-3xl mx-auto'>
+        <div className='max-w-3xl mx-auto' >
             <form onSubmit={handleProfileSubmit} className="card-body p-2">
                 <div className='border p-2 md:p-6 rounded-xl'>
                     <label className="label">
@@ -230,7 +255,7 @@ const ProfileForm = () => {
                         <label className="label">
                             <span className="label-text">Full Name*</span>
                         </label>
-                        <input type="text" name="fullName" placeholder="Full Name" className="input input-bordered" required />
+                        <input type="text" name="name" placeholder="Full Name" className="input input-bordered" required />
                     </div>
                     {/* <div className="form-control">
                     <label className="label">
@@ -362,8 +387,8 @@ const ProfileForm = () => {
                     <button className="btn btn-primary">Submit Profile Information</button>
                 </div>
             </form>
-        </div>
+        </div >
     );
 };
 
-export default ProfileForm;
+export default EditProfile;

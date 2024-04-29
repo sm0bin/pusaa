@@ -89,7 +89,9 @@ const EditProfile = () => {
                         <select type="text" name='role' className="select select-bordered" required>
                             {
                                 roles.map((role, index) => {
-                                    return <option key={index} value={role}>{role}</option>
+                                    return <option key={index} value={role}
+                                        selected={profile?.basic?.role === role}
+                                    >{role}</option>
                                 })
                             }
                         </select>
@@ -110,7 +112,11 @@ const EditProfile = () => {
                         <select type="text" name='university' className="select select-bordered" required>
                             {
                                 universities.map((university, index) => {
-                                    return <option key={index} value={university}>{university}</option>
+                                    return <option key={index}
+                                        value={university}
+                                        selected={profile?.education?.university === university}>
+                                        {university}
+                                    </option>
                                 })
                             }
                         </select>
@@ -123,7 +129,9 @@ const EditProfile = () => {
                         <select type="text" name='department' className="select select-bordered" required>
                             {
                                 departments.map((department, index) => {
-                                    return <option key={index} value={department}>{department}</option>
+                                    return <option key={index} value={department}
+                                        selected={profile?.education?.department === department}
+                                    >{department}</option>
                                 })
                             }
                         </select>
@@ -136,7 +144,9 @@ const EditProfile = () => {
                         <select type="text" name='session' className="select select-bordered" required>
                             {
                                 sessions.map((session, index) => {
-                                    return <option key={index} value={session}>{session}</option>
+                                    return <option key={index} value={session}
+                                        selected={profile?.education?.session === session}
+                                    >{session}</option>
                                 })
                             }
                         </select>

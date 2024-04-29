@@ -18,11 +18,23 @@ const Members = () => {
     }, []);
 
     return (
-        <div className='py-32'>
-            <h2>Members Database</h2>
+        <div className='py-32 px-8'>
+
+            <div className='flex justify-between items-center mb-8'>
+
+                <div>
+
+                    <h1 className='text-3xl font-bold'>Members</h1>
+                    <p className=''>List of all members</p>
+                </div>
+                <div className="join w-2/5">
+                    <input className="input input-bordered join-item w-full" placeholder="Search by Name, University, Department, Session..." />
+                    <button className="btn join-item px-8">Search</button>
+                </div>
+            </div>
 
             <div className="overflow-x-auto">
-                <table className="table table-xs">
+                <table className="table ">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -34,15 +46,6 @@ const Members = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Littel, Schaden and Vandervort</td>
-                            <td>Canada</td>
-                            <td>12/16/2020</td>
-                            <td>Blue</td>
-                        </tr> */}
-
                         {
                             members.map((member, index) => {
                                 return (

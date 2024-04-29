@@ -11,7 +11,7 @@ const Navbar = () => {
         { title: 'Profile', path: '/profile' },
         { title: 'Members', path: '/members' },
         { title: 'Gallery', path: '/gallery' },
-        { title: 'Notice & Events', path: '/notice-and-events' },
+        // { title: 'Notice & Events', path: '/notice-and-events' },
 
     ];
 

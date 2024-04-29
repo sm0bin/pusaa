@@ -6,9 +6,12 @@ import { NavLink } from 'react-router-dom';
 const Navbar = () => {
     const navLinks = [
         { title: 'Home', path: '/' },
-        { title: 'Login', path: '/login' },
-        { title: 'Signup', path: '/signup' },
+        // { title: 'Login', path: '/login' },
+        // { title: 'Signup', path: '/signup' },
         { title: 'Profile', path: '/profile' },
+        { title: 'Members', path: '/members' },
+        { title: 'Gallery', path: '/gallery' },
+        { title: 'Notice & Events', path: '/notice-and-events' },
 
     ];
 

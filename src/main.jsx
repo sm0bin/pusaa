@@ -16,6 +16,7 @@ import SignUp from "./components/pages/SignUp";
 import ForgotPassword from "./components/pages/ForgotPassword";
 import ResetPassword from "./components/pages/ResetPassword";
 import EditProfile from "./components/pages/EditProfile";
+import Members from "./components/pages/Members";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,18 @@ const router = createBrowserRouter([
         path: "/profile/edit",
         element: <EditProfile />,
       },
+      {
+        path: "/members",
+        element: <Members />,
+      },
+      // {
+      //   path: "/gallery",
+      //   element: <Gallery />,
+      // },
+      // {
+      //   path: "/notice-and-events",
+      //   element: <NoticeAndEvents />,
+      // },
       {
         path: "/forgot-password",
         element: <ForgotPassword />,

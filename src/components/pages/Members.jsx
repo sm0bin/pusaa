@@ -25,6 +25,7 @@ const Members = () => {
                 console.log(res.data.users);
                 if (res.status === 200) {
                     setMembers(res.data.users);
+                    e.target.reset();
                 }
             })
             .catch((error) => {

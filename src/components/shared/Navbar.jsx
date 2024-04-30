@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { navLinks } from '../../../utils/navLinks';
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
@@ -18,17 +20,6 @@ const Navbar = () => {
                 console.error(error);
             });
     }, []);
-
-    const navLinks = [
-        { title: 'Home', path: '/' },
-        // { title: 'Login', path: '/login' },
-        // { title: 'Signup', path: '/signup' },
-        { title: 'Profile', path: '/profile' },
-        { title: 'Members', path: '/members' },
-        { title: 'Gallery', path: '/gallery' },
-        // { title: 'Notice & Events', path: '/notice-and-events' },
-
-    ];
 
     const renderNavLinks = () => {
         return navLinks.map((link, index) => {
@@ -47,6 +38,8 @@ const Navbar = () => {
                 if (response.status === 200) {
                     console.log('Logged out');
                     toast.success(response.data.message);
+                    setUser(null);
+                    navigate('/login');
                 }
             })
             .catch((error) => {
@@ -55,7 +48,7 @@ const Navbar = () => {
             });
     }
     return (
-        <div className="fixed top-0 navbar bg-base-100">
+        <div className="fixed z-50 top-0 navbar bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

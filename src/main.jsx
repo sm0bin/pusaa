@@ -17,6 +17,7 @@ import ForgotPassword from "./components/pages/ForgotPassword";
 import ResetPassword from "./components/pages/ResetPassword";
 import EditProfile from "./components/pages/EditProfile";
 import Members from "./components/pages/Members";
+import Gallery from "./components/pages/Gallery";
 
 
 const router = createBrowserRouter([
@@ -53,10 +54,10 @@ const router = createBrowserRouter([
         path: "/members",
         element: <Members />,
       },
-      // {
-      //   path: "/gallery",
-      //   element: <Gallery />,
-      // },
+      {
+        path: "/gallery",
+        element: <Gallery />,
+      },
       // {
       //   path: "/notice-and-events",
       //   element: <NoticeAndEvents />,

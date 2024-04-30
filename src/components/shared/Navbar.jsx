@@ -1,9 +1,24 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+            .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                    setUser(res.data.user);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
     const navLinks = [
         { title: 'Home', path: '/' },
         // { title: 'Login', path: '/login' },
@@ -50,7 +65,7 @@ const Navbar = () => {
                         {renderNavLinks()}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">PUSAA</a>
+                <a className="btn btn-ghost text-xl font-black">PUSAA</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -58,8 +73,27 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <NavLink to='/login' className='btn btn-primary'>Login</NavLink>
-                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
+
+                {/* <button onClick={handleLogout} className='btn btn-primary'>Logout</button> */}
+                {
+                    user ?
+
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost">
+                                {/* <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div> */}
+                                {user.profile.basic.name || user.email}
+                            </div>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li><a>Profile</a></li>
+                                <li><a>Settings</a></li>
+                                <li><a onClick={handleLogout}>Logout</a></li>
+                            </ul>
+                        </div>
+                        :
+                        <NavLink to='/login' className='btn btn-primary'>Login</NavLink>
+                }
 
             </div>
         </div>

@@ -17,20 +17,38 @@ const Members = () => {
             });
     }, []);
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const search = e.target.search.value;
+        axios.get(`${import.meta.env.VITE_SERVER}/users?search=${search}`)
+            .then((res) => {
+                console.log(res.data.users);
+                if (res.status === 200) {
+                    setMembers(res.data.users);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     return (
         <div className='py-32 px-8'>
 
             <div className='flex justify-between items-center mb-8'>
 
                 <div>
-
                     <h1 className='text-3xl font-bold'>Members</h1>
-                    <p className=''>List of all members</p>
+                    {/* <p className=''>List of all members</p> */}
                 </div>
-                <div className="join w-2/5">
-                    <input className="input input-bordered join-item w-full" placeholder="Search by Name, University, Department, Session..." />
+                <form onSubmit={handleSearch} className="join w-2/5">
+                    <input
+                        className="input input-bordered join-item w-full"
+                        placeholder="Search by Name, University, Department, Session..."
+                        type="search" name="search" required
+                    />
                     <button className="btn join-item px-8">Search</button>
-                </div>
+                </form>
             </div>
 
             <div className="overflow-x-auto">
@@ -41,6 +59,7 @@ const Members = () => {
                             <th>University</th>
                             <th>Department</th>
                             <th>Session</th>
+                            <th>Role</th>
                             <th>Email</th>
                             <th>LinkedIn</th>
                         </tr>
@@ -54,6 +73,7 @@ const Members = () => {
                                         <td>{member.profile.education.university}</td>
                                         <td>{member.profile.education.department}</td>
                                         <td>{member.profile.education.session}</td>
+                                        <td>{member.profile.basic.role}</td>
                                         <td><a className='link link-hover link-info' href={`mailto:${member.profile.contact.email}`}>{member.profile.contact.email}</a></td>
                                         <td><a className='link link-hover link-info' href={member.profile.social.linkedin} target='_blank'>Visit</a></td>
                                     </tr>

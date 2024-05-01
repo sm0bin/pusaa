@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ["Nunito Sans", "sans-serif"],
+    },
+    extend: {
+      fontFamily: {
+        bengali: ["Noto Sans Bengali", "sans-serif"],
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

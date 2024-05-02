@@ -49,7 +49,7 @@ const Navbar = () => {
             });
     }
     return (
-        <div className='fixed z-50 top-0 w-full'>
+        <div className='sticky z-50 top-0 w-full'>
             <AnnouncementBar />
             <div className="navbar bg-base-100">
                 <div className="navbar-start">

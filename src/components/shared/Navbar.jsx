@@ -2,10 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { navLinks } from '../../../utils/navLinks';
+import { navLinks, themes } from '../../../utils/data';
 import AnnouncementBar from './AnnouncementBar';
+import { FiSun } from 'react-icons/fi';
 
-const Navbar = () => {
+const Navbar = ({ selectedTheme, setSelectedTheme }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
@@ -72,6 +73,16 @@ const Navbar = () => {
 
                 <div className="navbar-end">
 
+
+                    <select onChange={(e) => setSelectedTheme(e.target.value)} className="select select-bordered w-min capitalize mx-3">
+                        {
+                            themes.map((theme, index) => {
+                                return (
+                                    <option key={index} selected={theme === selectedTheme}>{theme}</option>
+                                );
+                            })
+                        }
+                    </select>
                     {/* <button onClick={handleLogout} className='btn btn-primary'>Logout</button> */}
                     {
                         user ?

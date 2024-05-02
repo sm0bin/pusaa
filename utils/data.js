@@ -182,3 +182,48 @@ export const roles =
         'Advisor',
         'Patron'
     ];
+
+export const navLinks = [
+    { title: 'Home', path: '/' },
+    { title: 'Profile', path: '/profile' },
+    { title: 'Members', path: '/members' },
+    { title: 'Gallery', path: '/gallery' },
+    { title: 'Notices', path: '/notices' },
+    // { title: 'Login', path: '/login' },
+    // { title: 'Signup', path: '/signup' },
+];
+
+export const themes = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+    "dim",
+    "nord",
+    "sunset",
+];

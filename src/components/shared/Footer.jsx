@@ -1,5 +1,5 @@
 import React from 'react';
-import { navLinks } from '../../../utils/navLinks';
+import { navLinks } from '../../../utils/data';
 import { NavLink } from 'react-router-dom';
 
 const Footer = () => {

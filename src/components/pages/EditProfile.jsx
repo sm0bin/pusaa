@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { roles, universities, departments, sessions } from '../../../utils/profileData';
+import { roles, universities, departments, sessions } from '../../../utils/data';
 
 const EditProfile = () => {
     const navigate = useNavigate();

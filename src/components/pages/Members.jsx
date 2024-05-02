@@ -34,7 +34,7 @@ const Members = () => {
     }
 
     return (
-        <div className='py-32 px-8'>
+        <div className='my-4 px-4 min-h-screen'>
 
             <div className='flex justify-between items-center mb-8'>
 

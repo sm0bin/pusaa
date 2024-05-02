@@ -41,8 +41,8 @@ const Gallery = () => {
     const chunkedEvents = arrayToChunk(events, 3);
 
     return (
-        <div className='py-16 px-4'>
-            <h1 className='text-3xl font-bold text-center my-8 capitalize'>Memories we lived together</h1>
+        <div className='my-4 px-4'>
+            <h1 className='text-3xl font-bold text-center my-8 capitalize font-bengali text-primary'>আমাদের স্মৃতিগুলো</h1>
             {/* <div className='flex flex-col gap-2'>
                 {
                     chunkedEvents.map((chunk, index) => {

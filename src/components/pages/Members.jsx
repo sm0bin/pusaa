@@ -70,13 +70,13 @@ const Members = () => {
                             members.map((member, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{member.profile.basic.name}</td>
-                                        <td>{member.profile.education.university}</td>
-                                        <td>{member.profile.education.department}</td>
-                                        <td>{member.profile.education.session}</td>
-                                        <td>{member.profile.basic.role}</td>
-                                        <td><a className='link link-hover link-info' href={`mailto:${member.profile.contact.email}`}>{member.profile.contact.email}</a></td>
-                                        <td><a className='link link-hover link-info' href={member.profile.social.linkedin} target='_blank'>Visit</a></td>
+                                        <td>{member?.profile?.basic?.name}</td>
+                                        <td>{member?.profile?.education?.university}</td>
+                                        <td>{member?.profile?.education?.department}</td>
+                                        <td>{member?.profile?.education?.session}</td>
+                                        <td>{member?.profile?.basic?.role}</td>
+                                        <td><a className='link link-hover link-info' href={`mailto:${member?.profile?.contact?.email}`}>{member?.profile?.contact?.email}</a></td>
+                                        <td><a className='link link-hover link-info' href={member?.profile?.social?.linkedin} target='_blank'>Visit</a></td>
                                     </tr>
                                 );
                             })

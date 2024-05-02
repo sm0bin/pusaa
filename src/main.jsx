@@ -18,6 +18,7 @@ import ResetPassword from "./components/pages/ResetPassword";
 import EditProfile from "./components/pages/EditProfile";
 import Members from "./components/pages/Members";
 import Gallery from "./components/pages/Gallery";
+import AboutUs from "./components/pages/AboutUs";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/gallery",
         element: <Gallery />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
       // {
       //   path: "/notice-and-events",

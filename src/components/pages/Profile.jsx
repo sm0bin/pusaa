@@ -19,7 +19,7 @@ const Profile = () => {
     }, []);
 
     return (
-        <div className='h-screen w-full flex justify-center items-center'>
+        <div className='max-w-7xl min-h-[90vh] mx-auto flex justify-center items-center'>
             {
                 profile ? (
                     <div>

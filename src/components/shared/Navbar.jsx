@@ -95,8 +95,14 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
                                     {user?.profile?.basic?.name || user.email}
                                 </div>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                    <li><NavLink to='/profile'>Profile</NavLink></li>
-                                    <li><NavLink to='/profile/edit'>Edit Profile</NavLink></li>
+                                    {
+                                        user.profile ?
+                                            <>
+                                                <li><NavLink to='/profile'>Profile</NavLink></li>
+                                                <li><NavLink to='/profile/edit'>Edit Profile</NavLink></li>
+                                            </> :
+                                            <li><NavLink to='/profile/new'>Create Profile</NavLink></li>
+                                    }
                                     <li><a onClick={handleLogout}>Logout</a></li>
                                 </ul>
                             </div>

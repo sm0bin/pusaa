@@ -5,7 +5,7 @@ const Members = () => {
     const [members, setMembers] = useState([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/users`)
+        axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
             .then((res) => {
                 console.log(res.data.users);
                 if (res.status === 200) {

@@ -3,23 +3,23 @@ import React, { useEffect, useState } from 'react';
 import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
 
 const Members = () => {
-    const [members, isPending, refetch, error] = useLoadDataPrivate('/users', 'members');
-    const [displayMembers, setDisplayMembers] = useState(members?.users);
+    // const [members, isPending, refetch, error] = useLoadDataPrivate('/users', 'members');
+    // const [displayMembers, setDisplayMembers] = useState(members?.users);
 
-    // const [members, setMembers] = useState([]);
-    // useEffect(() => {
-    //     axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
-    //         .then((res) => {
-    //             console.log(res.data.users);
-    //             if (res.status === 200) {
-    //                 setMembers(res.data.users);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }, []);
-    // console.log(members);
+    const [members, setMembers] = useState([]);
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
+            .then((res) => {
+                console.log(res.data.users);
+                if (res.status === 200) {
+                    setMembers(res.data.users);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+    console.log(members);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -29,8 +29,8 @@ const Members = () => {
             .then((res) => {
                 console.log(res.data.users);
                 if (res.status === 200) {
-                    // setMembers(res.data.users);
-                    setDisplayMembers(res.data.users);
+                    setMembers(res.data.users);
+                    // setDisplayMembers(res.data.users);
                     e.target.reset();
                 }
             })
@@ -39,13 +39,13 @@ const Members = () => {
             });
     }
 
-    if (isPending) {
-        return (
-            <div className='w-full min-h-[90vh] flex justify-center items-center'>
-                <span className="loading loading-bars loading-lg"></span>
-            </div>
-        );
-    }
+    // if (isPending) {
+    //     return (
+    //         <div className='w-full min-h-[90vh] flex justify-center items-center'>
+    //             <span className="loading loading-bars loading-lg"></span>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div className='my-4 px-4 min-h-screen'>
@@ -81,7 +81,7 @@ const Members = () => {
                     </thead>
                     <tbody>
                         {
-                            displayMembers?.map((member, index) => {
+                            members?.map((member, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{member?.profile?.basic?.name}</td>

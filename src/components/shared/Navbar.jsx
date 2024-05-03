@@ -5,23 +5,25 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { navLinks, themes } from '../../../utils/data';
 import AnnouncementBar from './AnnouncementBar';
 import { FiSun } from 'react-icons/fi';
+import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
 
 const Navbar = ({ selectedTheme, setSelectedTheme }) => {
-    const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const [user, isPending, refetch, error] = useLoadDataPrivate('/auth/profile', 'user');
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
-            .then((res) => {
-                console.log(res);
-                if (res.status === 200) {
-                    setUser(res.data.user);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
+    // const [user, setUser] = useState(null);
+    // useEffect(() => {
+    //     axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+    //         .then((res) => {
+    //             console.log(res);
+    //             if (res.status === 200) {
+    //                 setUser(res.data.user);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }, []);
 
     const renderNavLinks = () => {
         return navLinks.map((link, index) => {
@@ -33,6 +35,14 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
         });
     }
 
+    if (isPending) {
+        return (
+            <div className='w-full min-h-[10vh] flex justify-center items-center'>
+                <span className="loading loading-bars loading-lg"></span>
+            </div>
+        );
+    }
+
     const handleLogout = () => {
         axios.get(`${import.meta.env.VITE_SERVER}/auth/logout`, { withCredentials: true })
             .then((response) => {
@@ -40,7 +50,8 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
                 if (response.status === 200) {
                     console.log('Logged out');
                     toast.success(response.data.message);
-                    setUser(null);
+                    refetch();
+                    // setUser(null);
                     navigate('/login');
                 }
             })
@@ -85,18 +96,18 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
                     </select>
                     {/* <button onClick={handleLogout} className='btn btn-primary'>Logout</button> */}
                     {
-                        user ?
+                        user?.user ?
 
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost">
                                     {/* <div className="w-10 rounded-full">
                             <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </div> */}
-                                    {user?.profile?.basic?.name || user.email}
+                                    {user?.user?.profile?.basic?.name || user?.user.email}
                                 </div>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                                     {
-                                        user.profile ?
+                                        user?.user.profile ?
                                             <>
                                                 <li><NavLink to='/profile'>Profile</NavLink></li>
                                                 <li><NavLink to='/profile/edit'>Edit Profile</NavLink></li>

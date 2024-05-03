@@ -7,7 +7,7 @@ const AboutAkhaura = () => {
             {/* <h1 className='text-3xl font-bold text-center my-8 capitalize font-bengali text-primary'>আখাউড়া উপজেলা</h1> */}
 
             <div className="hero my-32">
-                <div className="hero-content flex-col lg:flex-row">
+                <div className="hero-content p-0 flex-col lg:flex-row">
                     <img src={akhauraMap} className="max-w-sm " />
                     <div className='font-bengali'>
                         <h1 className="text-5xl font-bold">আমাদের আখাউড়া</h1>

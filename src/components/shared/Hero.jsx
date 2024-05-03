@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
-        <div className="hero min-h-[80vh] bg-base-200">
+        <div className="hero min-h-[90vh] bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src="/pusaa-logo.svg" className="max-w-sm" />
                 <div className='font-bengali'>

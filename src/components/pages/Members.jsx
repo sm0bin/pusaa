@@ -1,36 +1,50 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
 
 const Members = () => {
-    const [members, setMembers] = useState([]);
+    const [members, isPending, refetch, error] = useLoadDataPrivate('/users', 'members');
+    const [displayMembers, setDisplayMembers] = useState(members?.users);
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
-            .then((res) => {
-                console.log(res.data.users);
-                if (res.status === 200) {
-                    setMembers(res.data.users);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
+    // const [members, setMembers] = useState([]);
+    // useEffect(() => {
+    //     axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
+    //         .then((res) => {
+    //             console.log(res.data.users);
+    //             if (res.status === 200) {
+    //                 setMembers(res.data.users);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }, []);
+    // console.log(members);
 
     const handleSearch = (e) => {
         e.preventDefault();
         const search = e.target.search.value;
+
         axios.get(`${import.meta.env.VITE_SERVER}/users?search=${search}`)
             .then((res) => {
                 console.log(res.data.users);
                 if (res.status === 200) {
-                    setMembers(res.data.users);
+                    // setMembers(res.data.users);
+                    setDisplayMembers(res.data.users);
                     e.target.reset();
                 }
             })
             .catch((error) => {
                 console.error(error);
             });
+    }
+
+    if (isPending) {
+        return (
+            <div className='w-full min-h-[90vh] flex justify-center items-center'>
+                <span className="loading loading-bars loading-lg"></span>
+            </div>
+        );
     }
 
     return (
@@ -67,7 +81,7 @@ const Members = () => {
                     </thead>
                     <tbody>
                         {
-                            members.map((member, index) => {
+                            displayMembers?.map((member, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{member?.profile?.basic?.name}</td>

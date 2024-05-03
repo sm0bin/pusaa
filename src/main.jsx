@@ -19,6 +19,11 @@ import EditProfile from "./components/pages/EditProfile";
 import Members from "./components/pages/Members";
 import Gallery from "./components/pages/Gallery";
 import AboutUs from "./components/pages/AboutUs";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+const queryClient = new QueryClient();
 
 
 const router = createBrowserRouter([
@@ -81,7 +86,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Toaster />
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <Toaster />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

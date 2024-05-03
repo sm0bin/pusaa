@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = useState('password');
     axios.defaults.withCredentials = true;
 
     const handleLogin = (e) => {
@@ -19,6 +22,7 @@ const Login = () => {
                 if (response.status === 200) {
                     toast.success(response.data.message);
                     navigate('/');
+                    // window.location.reload();
                 }
             })
             .catch((err) => {
@@ -42,14 +46,29 @@ const Login = () => {
                             </label>
                             <input name="email" type="email" placeholder="email" className="input input-bordered" required />
                         </div>
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input name="password" type="password" placeholder="password" className="input input-bordered" required />
-                            {/* <label className="label">
+                            <label className="label">
                                 <Link to='/forgot-password' className="label-text-alt link link-hover">Forgot password?</Link>
-                            </label> */}
+                            </label>
+                        </div> */}
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <label className="input input-bordered flex items-center gap-2">
+                                <input name='password' type={passwordType} className="grow" placeholder="password" />
+                                {
+                                    passwordType === 'password' ?
+                                        <PiEyeBold type="button" onClick={() => setPasswordType('text')} className="" />
+                                        :
+                                        <PiEyeClosedBold type="button" onClick={() => setPasswordType('password')} />
+                                }
+                            </label>
+                            {/* <input name="password" type="password" placeholder="password" className="input input-bordered" required /> */}
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>

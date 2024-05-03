@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = useState('password');
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -45,7 +48,16 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input name="password" type="password" placeholder="password" className="input input-bordered" required />
+                            <label className="input input-bordered flex items-center gap-2">
+                                <input name='password' type={passwordType} className="grow" placeholder="password" />
+                                {
+                                    passwordType === 'password' ?
+                                        <PiEyeBold type="button" onClick={() => setPasswordType('text')} className="" />
+                                        :
+                                        <PiEyeClosedBold type="button" onClick={() => setPasswordType('password')} />
+                                }
+                            </label>
+                            {/* <input name="password" type="password" placeholder="password" className="input input-bordered" required /> */}
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Sign Up</button>

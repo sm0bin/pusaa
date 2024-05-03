@@ -51,8 +51,8 @@ const Testimonials = () => {
                     testimonials.map((testimonial) => {
                         return (
                             <SwiperSlide key={testimonial._id}>
-                                <div className="px-20 py-16 font-bengali">
-                                    <div className="w-2/3 mx-auto">
+                                <div className=" p-4 md:p-16 font-bengali">
+                                    <div className="w-11/12 md:w-2/3 mx-auto">
                                         <div className="my-4 flex justify-center gap-2">
                                             <FaQuoteLeft className='self-start text-primary w-8' />
                                             <p className="text-center">

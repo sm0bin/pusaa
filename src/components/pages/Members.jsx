@@ -50,24 +50,24 @@ const Members = () => {
     return (
         <div className='my-4 px-4 min-h-screen'>
 
-            <div className='flex justify-between items-center mb-8'>
+            <div className='flex flex-col md:flex-row justify-between items-center mb-8'>
 
                 <div>
-                    <h1 className='text-3xl font-bold'>Members</h1>
+                    <h1 className='text-3xl font-bold font-bengali max-sm:mb-3'>সদস্যবৃন্দ</h1>
                     {/* <p className=''>List of all members</p> */}
                 </div>
-                <form onSubmit={handleSearch} className="join w-2/5">
+                <form onSubmit={handleSearch} className="join w-full md:w-2/5">
                     <input
                         className="input input-bordered join-item w-full"
                         placeholder="Search by Name, University, Department, Session..."
                         type="search" name="search" required
                     />
-                    <button className="btn join-item px-8">Search</button>
+                    <button className="btn join-item md:px-8">Search</button>
                 </form>
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table ">
+                <table className="table max-lg:w-max ">
                     <thead>
                         <tr>
                             <th>Name</th>

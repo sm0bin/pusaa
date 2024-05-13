@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import auth from "../firebase/firebase.config";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const googleProvider = new GoogleAuthProvider();
 export const AuthContext = createContext(null);
@@ -44,14 +45,22 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setLoading(false);
             if (currentUser) {
-                axios.post("https://tuition-master.vercel.app/jwt", loggedInUser, { withCredentials: true })
+                axios.post(`${import.meta.env.VITE_SERVER}/jwt`, loggedInUser, { withCredentials: true })
                     .then(res => {
                         console.log(res.data);
                     })
+                    .error(err => {
+                        console.error(err);
+                        toast.error(err.message);
+                    })
             } else {
-                axios.post("https://tuition-master.vercel.app/logout", loggedInUser, { withCredentials: true })
+                axios.post(`${import.meta.env.VITE_SERVER}/logout`, loggedInUser, { withCredentials: true })
                     .then(res => {
                         console.log(res.data);
+                    })
+                    .error(err => {
+                        console.error(err);
+                        toast.error(err.message);
                     })
             }
         });
@@ -75,10 +84,6 @@ const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider >
     );
-};
-
-AuthProvider.propTypes = {
-    children: PropTypes.node,
 };
 
 export default AuthProvider;

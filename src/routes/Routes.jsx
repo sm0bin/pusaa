@@ -12,6 +12,7 @@ import EditProfile from "../components/pages/EditProfile";
 import Members from "../components/pages/Members";
 import Gallery from "../components/pages/Gallery";
 import AboutUs from "../components/pages/AboutUs";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -33,19 +34,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <Profile />,
+                element: <PrivateRoute><Profile /></PrivateRoute>,
             },
             {
                 path: "/profile/new",
-                element: <CreateProfile />,
+                element: <PrivateRoute><CreateProfile /></PrivateRoute>,
             },
             {
                 path: "/profile/edit",
-                element: <EditProfile />,
+                element: <PrivateRoute><EditProfile /></PrivateRoute>,
             },
             {
                 path: "/members",
-                element: <Members />,
+                element: <PrivateRoute><Members /></PrivateRoute>,
             },
             {
                 path: "/gallery",

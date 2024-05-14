@@ -11,7 +11,6 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [passwordType, setPasswordType] = useState('password');
-    axios.defaults.withCredentials = true;
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -34,7 +33,7 @@ const Login = () => {
                 toast.error(error.message);
             })
 
-        // axios.post(`${import.meta.env.VITE_SERVER}/auth/login`, data)
+        // axios.post(`${import.meta.env.VITE_SERVER}/auth/login`, data,{ withCredentials: true })
         //     .then((response) => {
         //         console.log(response);
         //         if (response.status === 200) {

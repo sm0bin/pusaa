@@ -49,7 +49,7 @@ const EditProfile = () => {
             }
         };
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
+        axios.put(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import auth from "../firebase/firebase.config";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
@@ -45,7 +44,7 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setLoading(false);
             if (currentUser) {
-                axios.post(`${import.meta.env.VITE_SERVER}/jwt`, loggedInUser, { withCredentials: true })
+                axios.post(`${import.meta.env.VITE_SERVER}/auth/jwt`, loggedInUser, { withCredentials: true })
                     .then(res => {
                         console.log(res.data);
                     })

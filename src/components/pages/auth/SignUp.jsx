@@ -2,31 +2,89 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
+import useAuth from '../../../hooks/useAuth';
 
 const SignUp = () => {
+    const { signUpUser, updateUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [passwordType, setPasswordType] = useState('password');
+    const [signUpError, setSignUpError] = useState("");
 
-    const handleSignUp = (e) => {
+    // const handleSignUp = (e) => {
+    //     e.preventDefault();
+    //     const formData = new FormData(e.target);
+    //     const data = Object.fromEntries(formData);
+    //     console.log(data);
+
+    //     axios.post(`${import.meta.env.VITE_SERVER}/auth/signup`, data)
+    //         .then((response) => {
+    //             console.log(response);
+    //             if (response.status === 201) {
+    //                 toast.success(response.data.message);
+    //                 navigate('/login');
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //             toast.error('Sign up failed');
+    //         });
+    // }
+
+
+    const handleSignUp = e => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        console.log(data);
+        setSignUpError("");
+        const form = e.currentTarget;
+        const email = form.email.value;
+        const password = form.password.value;
+        // const name = form.name.value;
+        // const photoUrl = form.photoUrl.value;
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/signup`, data)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 201) {
-                    toast.success(response.data.message);
-                    navigate('/login');
-                }
+        if (password.length < 6) {
+            setSignUpError('Password must be at least 6 characters long.');
+            return;
+        }
+        else if (!/[a-z]/.test(password)) {
+            setSignUpError('Password must contain at least one lowercase letter.');
+            return;
+        }
+        else if (!/[A-Z]/.test(password)) {
+            setSignUpError('Password must contain at least one uppercase letter.');
+            return;
+        }
+        else if (!/[0-9]/.test(password)) {
+            setSignUpError('Password must contain at least one number.');
+            return;
+        }
+        else if (!/[!@#$%^&*()+=]/.test(password)) {
+            setSignUpError('Password must contain at least one special character.');
+            return;
+        }
+
+        signUpUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                toast.success('User created successfully.');
+                form.reset();
+                navigate(location?.state ? location.state : '/');
+                // updateUser(name, photoUrl)
+                //     .then(result => {
+                //         console.log(result);
+                //         toast.success('User created successfully.');
+                //         form.reset();
+                //     })
+                //     .catch(error => {
+                //         console.error(error);
+                //         toast.error(error.message);
+                //     })
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error(error);
-                toast.error('Sign up failed');
-            });
+                toast.error(error.message);
+            })
     }
 
     return (

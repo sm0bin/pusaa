@@ -6,24 +6,64 @@ import { navLinks, themes } from '../../../utils/data';
 import AnnouncementBar from './AnnouncementBar';
 import { FiSun } from 'react-icons/fi';
 import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = ({ selectedTheme, setSelectedTheme }) => {
+    const { user, logoutUser } = useAuth();
     const navigate = useNavigate();
     // const [user, isPending, refetch, error] = useLoadDataPrivate('/auth/profile', 'user');
 
-    const [user, setUser] = useState(null);
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
-            .then((res) => {
-                console.log(res);
-                if (res.status === 200) {
-                    setUser(res.data.user);
-                }
+    // const [user, setUser] = useState(null);
+    // useEffect(() => {
+    //     axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+    //         .then((res) => {
+    //             console.log(res);
+    //             if (res.status === 200) {
+    //                 setUser(res.data.user);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }, []);
+
+    // if (isPending) {
+    //     return (
+    //         <div className='w-full min-h-[10vh] flex justify-center items-center'>
+    //             <span className="loading loading-bars loading-lg"></span>
+    //         </div>
+    //     );
+    // }
+
+    // const handleLogout = () => {
+    //     axios.get(`${import.meta.env.VITE_SERVER}/auth/logout`, { withCredentials: true })
+    //         .then((response) => {
+    //             console.log(response);
+    //             if (response.status === 200) {
+    //                 console.log('Logged out');
+    //                 toast.success(response.data.message);
+    //                 // refetch();
+    //                 setUser(null);
+    //                 navigate('/login');
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //             toast.error('Logout failed');
+    //         });
+    // }
+
+    const handleLogout = () => {
+        logoutUser()
+            .then(result => {
+                console.log(result);
+                toast.success('Logout Successful.');
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error(error);
-            });
-    }, []);
+                toast.error(error.message);
+            })
+    }
 
     const renderNavLinks = () => {
         return navLinks.map((link, index) => {
@@ -35,31 +75,6 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
         });
     }
 
-    // if (isPending) {
-    //     return (
-    //         <div className='w-full min-h-[10vh] flex justify-center items-center'>
-    //             <span className="loading loading-bars loading-lg"></span>
-    //         </div>
-    //     );
-    // }
-
-    const handleLogout = () => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/logout`, { withCredentials: true })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    console.log('Logged out');
-                    toast.success(response.data.message);
-                    // refetch();
-                    setUser(null);
-                    navigate('/login');
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                toast.error('Logout failed');
-            });
-    }
     return (
         <div className='sticky z-50 top-0 w-full'>
             {/* <AnnouncementBar /> */}

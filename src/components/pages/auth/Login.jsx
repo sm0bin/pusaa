@@ -2,33 +2,51 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+    const { loginUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [passwordType, setPasswordType] = useState('password');
     axios.defaults.withCredentials = true;
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        console.log(data);
+        // const formData = new FormData(e.target);
+        // const data = Object.fromEntries(formData);
+        // console.log(data);
+        const form = e.currentTarget;
+        const email = form.email.value;
+        const password = form.password.value;
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/login`, data)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    toast.success(response.data.message);
-                    navigate('/');
-                    // window.location.reload();
-                }
+        loginUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                toast.success('Login Successful.');
+                form.reset();
+                navigate(location?.state ? location.state : '/');
             })
-            .catch((err) => {
-                console.error(err);
-                toast.error(err.message);
-            });
+            .catch(error => {
+                console.error(error);
+                toast.error(error.message);
+            })
+
+        // axios.post(`${import.meta.env.VITE_SERVER}/auth/login`, data)
+        //     .then((response) => {
+        //         console.log(response);
+        //         if (response.status === 200) {
+        //             toast.success(response.data.message);
+        //             navigate('/');
+        //             // window.location.reload();
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //         toast.error(err.message);
+        //     });
     }
 
     return (

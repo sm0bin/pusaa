@@ -3,8 +3,10 @@ import React from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
+import useAuth from '../../hooks/useAuth';
 
 const CreateProfile = () => {
+    const { updateUser } = useAuth();
     const navigate = useNavigate();
 
     const handleProfileSubmit = (e) => {
@@ -39,8 +41,16 @@ const CreateProfile = () => {
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
-                    toast.success(response.data.message);
-                    navigate('/profile');
+                    updateUser(data.name)
+                        .then(result => {
+                            console.log(result);
+                            toast.success('Profile Created Successfully.');
+                            navigate('/profile');
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            toast.error(error.message);
+                        })
                 }
             })
             .catch((err) => {

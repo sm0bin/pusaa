@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
+import useAuth from '../../hooks/useAuth';
 
 const EditProfile = () => {
+    const { updateUser } = useAuth();
     const navigate = useNavigate();
     const [profile, setProfile] = useState(null);
 
@@ -53,8 +55,16 @@ const EditProfile = () => {
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {
-                    toast.success(res.data.message);
-                    navigate('/profile');
+                    updateUser(data.name)
+                        .then(result => {
+                            console.log(result);
+                            toast.success('Profile updated successfully.');
+                            navigate('/profile');
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            toast.error(error.message);
+                        });
                 }
             })
             .catch((err) => {

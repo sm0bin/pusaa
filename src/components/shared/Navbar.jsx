@@ -77,11 +77,11 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
                                     {/* <div className="w-10 rounded-full">
                             <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </div> */}
-                                    {user?.profile?.basic?.name || user?.email}
+                                    {user?.displayName || user?.email}
                                 </div>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                                     {
-                                        user?.profile ?
+                                        user?.displayName ?
                                             <>
                                                 <li><NavLink to='/profile'>Profile</NavLink></li>
                                                 <li><NavLink to='/profile/edit'>Edit Profile</NavLink></li>

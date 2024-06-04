@@ -6,14 +6,14 @@ const Footer = () => {
     return (
         <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
             <aside>
-                <img className='w-1/2' src="/pusaa-logo.svg" alt="" />
+                <img className='w-72' src="/pusaa-logo.svg" alt="" />
                 {/* <p className="text-xl font-bold">
                     Public University Students Association of Akhaura <br />
                     Akhaura, Brahmanbaria, Bangladesh
                 </p> */}
-                <p className="text-xl font-bold font-bengali">
-                    পাবলিক ইউনিভার্সিটি স্টুডেন্টস অ্যাসোসিয়েশন অব আখাউড়া
-                    <br />
+                <p className="text-xl font-bold font-bengali mt-2">
+                    {/* পাবলিক ইউনিভার্সিটি স্টুডেন্টস অ্যাসোসিয়েশন অব আখাউড়া
+                    <br /> */}
                     আখাউড়া, ব্রাহ্মণবাড়িয়া, বাংলাদেশ
                 </p>
                 {/* <p>Copyright © 2024 - All right reserved</p> */}

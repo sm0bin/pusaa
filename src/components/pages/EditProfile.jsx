@@ -75,7 +75,7 @@ const EditProfile = () => {
     }
 
     return (
-        <div className='max-w-3xl mx-auto' >
+        <div className='max-w-3xl mx-auto pt-20 pb-32' >
             <form onSubmit={handleProfileSubmit} className="card-body p-2">
                 <div className='border p-2 md:p-6 rounded-xl'>
                     <label className="label">

@@ -49,6 +49,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><Members /></PrivateRoute>,
             },
             {
+                path: "/committee",
+                element: <PrivateRoute><Members /></PrivateRoute>,
+            },
+            {
                 path: "/gallery",
                 element: <Gallery />,
             },

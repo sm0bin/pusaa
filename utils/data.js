@@ -469,7 +469,7 @@ export const navLinks = [
     { title: 'হোম', path: '/' },
     // { title: 'Profile', path: '/profile' },
     { title: 'সদস্যবৃন্দ', path: '/members' },
-    { title: 'বর্তমান কমিটি', path: '/members' },
+    { title: 'বর্তমান কমিটি', path: '/committee' },
     { title: 'গ্যালারি', path: '/gallery' },
     { title: 'আমাদের সম্পর্কে', path: '/about-us' },
     // { title: 'Notices', path: '/notices' },

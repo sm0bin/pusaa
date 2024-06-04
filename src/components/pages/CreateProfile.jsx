@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
@@ -37,10 +36,10 @@ const CreateProfile = () => {
             }
         };
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
+        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile)
             .then((response) => {
                 console.log(response);
-                if (response.status === 200) {
+                if (response.status === 201) {
                     updateUser(data.name)
                         .then(result => {
                             console.log(result);
@@ -192,7 +191,7 @@ const CreateProfile = () => {
                 <div className="form-control">
                     <label className="label">
                         {/* <span className="label-text">Note: You must need to provide the star marked information. Among your contact information only your Email and LinkedIn will be publicly visible.</span> */}
-                        <span className="label-text font-bengali">দ্রষ্টব্যঃ তারকা চিহ্নিত তথ্য প্রদান বাধ্যতামূলক। আপনার বিশ্ববিদ্যালয় অথবা ডিপার্টমেন্ট অন্তর্ভূক্ত না থাকলে 'Others' প্রদান করুন এবং আমাদের অবহিত করুন এই মেইলেঃ <a target="_blank" href="mailto:shehjad0mobin@gmail.com?subject=PUSAA Website Issue!&body=I have a problem, please have a look." className='link link-hover link-info font-semibold'>shehjad0mobin@gmail.com</a></span>
+                        <span className="label-text font-bengali">দ্রষ্টব্যঃ তারকা চিহ্নিত তথ্য প্রদান বাধ্যতামূলক। আপনার বিশ্ববিদ্যালয় অথবা ডিপার্টমেন্ট অন্তর্ভূক্ত না থাকলে &apos;Others&apos; প্রদান করুন এবং আমাদের অবহিত করুন এই মেইলেঃ <a target="_blank" href="mailto:shehjad0mobin@gmail.com?subject=PUSAA Website Issue!&body=I have a problem, please have a look." className='link link-hover link-info font-semibold'>shehjad0mobin@gmail.com</a></span>
                     </label>
                     {/* <input type="text" name="linkedin" placeholder="LinkedIn" className="input input-bordered" /> */}
                 </div>

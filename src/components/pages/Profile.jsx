@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`)
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {

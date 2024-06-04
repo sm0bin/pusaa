@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
@@ -11,7 +11,7 @@ const EditProfile = () => {
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`, { withCredentials: true })
+        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`)
             .then((res) => {
                 console.log(res.data.user.profile);
                 if (res.status === 200) {

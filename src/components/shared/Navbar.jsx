@@ -1,16 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { navLinks, themes } from '../../../utils/data';
-import AnnouncementBar from './AnnouncementBar';
-import { FiSun } from 'react-icons/fi';
-import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = ({ selectedTheme, setSelectedTheme }) => {
     const { user, logoutUser } = useAuth();
-    const navigate = useNavigate();
 
     const handleLogout = () => {
         logoutUser()
@@ -35,7 +29,8 @@ const Navbar = ({ selectedTheme, setSelectedTheme }) => {
     }
 
     return (
-        <div className='sticky z-50 top-0 w-full'>
+        // <div className='sticky z-50 top-0 w-full'>
+        <div className='fixed inset-x-0 z-50 top-0 w-full'>
             {/* <AnnouncementBar /> */}
             <div className="navbar bg-base-100">
                 <div className="navbar-start">

@@ -1,17 +1,18 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
 import useAuth from '../../hooks/useAuth';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 const EditProfile = () => {
-    const { updateUser } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
+    const { updateUser } = useAuth();
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`)
+        axiosPrivate(`/auth/profile`)
             .then((res) => {
                 console.log(res.data.user.profile);
                 if (res.status === 200) {
@@ -51,7 +52,7 @@ const EditProfile = () => {
             }
         };
 
-        axios.put(`${import.meta.env.VITE_SERVER}/auth/profile`, profile, { withCredentials: true })
+        axiosPrivate.put(`/auth/profile`, profile)
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {

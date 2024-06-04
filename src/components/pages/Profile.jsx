@@ -1,12 +1,13 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 const Profile = () => {
+    const axiosPrivate = useAxiosPrivate();
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/auth/profile`)
+        axiosPrivate(`/auth/profile`)
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {
@@ -16,7 +17,7 @@ const Profile = () => {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [axiosPrivate]);
 
     return (
         <div className='max-w-7xl min-h-[90vh] mx-auto flex justify-center items-center'>

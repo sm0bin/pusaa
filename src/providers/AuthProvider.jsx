@@ -7,7 +7,6 @@ import { toast } from 'react-hot-toast';
 const googleProvider = new GoogleAuthProvider();
 export const AuthContext = createContext(null);
 
-
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -41,31 +40,33 @@ const AuthProvider = ({ children }) => {
             const userEmail = currentUser?.email || user?.email;
             const loggedInUser = { email: userEmail };
             setUser(currentUser);
-            setLoading(false);
             if (currentUser) {
                 axios.post(`${import.meta.env.VITE_SERVER}/auth/jwt`, loggedInUser, { withCredentials: true })
                     .then(res => {
-                        console.log(res.data);
-                    })
-                    .error(err => {
+                        if (res.data.token) {
+                            localStorage.setItem('token', res.data.token);
+                        }
+                        setLoading(false);
+                    }).catch(err => {
+                        localStorage.removeItem('token');
+                        setLoading(false);
                         console.error(err);
                         toast.error(err.message);
-                    })
+                    });
             } else {
                 axios.post(`${import.meta.env.VITE_SERVER}/logout`, loggedInUser, { withCredentials: true })
                     .then(res => {
+                        setLoading(false);
                         console.log(res.data);
-                    })
-                    .error(err => {
+                    }).catch(err => {
                         console.error(err);
                         toast.error(err.message);
-                    })
+                        setLoading(false);
+                    });
             }
         });
-        return () => {
-            return unsubscribe()
-        };
-    }, [user?.email]);
+        return () => unsubscribe();
+    }, [user]);
 
     const authInfo = {
         user,
@@ -80,7 +81,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
-        </AuthContext.Provider >
+        </AuthContext.Provider>
     );
 };
 

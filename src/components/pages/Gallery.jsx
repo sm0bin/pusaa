@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import EventCard from '../shared/EventCard';
-import { arrayToChunk } from '../../../utils/functions';
+// import { arrayToChunk } from '../../../utils/functions';
 import EventModalCard from '../shared/EventModalCard';
 
 const Gallery = () => {
@@ -38,10 +38,10 @@ const Gallery = () => {
 
 
 
-    const chunkedEvents = arrayToChunk(events, 3);
+    // const chunkedEvents = arrayToChunk(events, 3);
 
     return (
-        <div className='m-2'>
+        <div className='mb-32 min-h-screen mx-4'>
             <h1 className='text-3xl font-bold text-center my-8 capitalize font-bengali text-primary'>আমাদের স্মৃতিগুলো</h1>
             {/* <div className='flex flex-col gap-2'>
                 {

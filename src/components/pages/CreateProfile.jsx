@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { roles, universities, departments, sessions } from '../../../utils/data';
 import useAuth from '../../hooks/useAuth';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 const CreateProfile = () => {
+    const axiosPrivate = useAxiosPrivate();
     const { updateUser } = useAuth();
     const navigate = useNavigate();
 
@@ -36,8 +37,8 @@ const CreateProfile = () => {
             }
         };
 
-        axios.post(`${import.meta.env.VITE_SERVER}/auth/profile`, profile)
-            .then((response) => {
+        axiosPrivate.post(`/auth/profile`, profile)
+            .then(response => {
                 console.log(response);
                 if (response.status === 201) {
                     updateUser(data.name)
@@ -47,15 +48,16 @@ const CreateProfile = () => {
                             navigate('/profile');
                         })
                         .catch(error => {
-                            console.error(error);
+                            console.error('Error updating user:', error);
                             toast.error(error.message);
-                        })
+                        });
                 }
             })
-            .catch((err) => {
-                console.error(err);
-                toast.error(err.message);
+            .catch(error => {
+                console.error('Error creating profile:', error);
+                toast.error(error.message);
             });
+
     }
 
     return (

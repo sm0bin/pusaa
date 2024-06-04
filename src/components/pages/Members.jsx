@@ -49,7 +49,7 @@ const Members = () => {
     // }
 
     return (
-        <div className='my-4 px-4 min-h-screen'>
+        <div className='py-32 px-4 min-h-screen'>
 
             <div className='flex flex-col md:flex-row justify-between items-center mb-8'>
 
@@ -61,7 +61,7 @@ const Members = () => {
                     <input
                         className="input input-bordered join-item w-full"
                         placeholder="Search by Name, University, Department, Session..."
-                        type="search" name="search" required
+                        type="search" name="search"
                     />
                     <button className="btn join-item md:px-8">Search</button>
                 </form>

@@ -1,6 +1,4 @@
-import React from 'react';
-import { navLinks } from '../../../utils/data';
-import { NavLink } from 'react-router-dom';
+
 
 const Footer = () => {
     return (

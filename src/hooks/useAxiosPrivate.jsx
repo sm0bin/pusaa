@@ -9,7 +9,7 @@ const axiosPrivate = axios.create({
 
 const useAxiosPrivate = () => {
     const navigate = useNavigate();
-    const { logOut } = useAuth();
+    const { logoutUser } = useAuth();
 
     // Add a request interceptor
     axiosPrivate.interceptors.request.use(
@@ -18,7 +18,7 @@ const useAxiosPrivate = () => {
             if (token) {
                 config.headers.authorization = `Bearer ${token}`;
             } else {
-                logOut().then(() => navigate('/login'));
+                logoutUser().then(() => navigate('/login'));
             }
             return config;
         },
@@ -32,7 +32,7 @@ const useAxiosPrivate = () => {
             if (error.response) {
                 const { status } = error.response;
                 if (status === 401 || status === 403) {
-                    logOut().then(() => navigate('/login'));
+                    logoutUser().then(() => navigate('/login'));
                 }
             } else {
                 console.error('Network or unexpected error', error);

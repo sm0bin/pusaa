@@ -22,7 +22,7 @@ const EditProfile = () => {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [axiosPrivate]);
 
     const handleProfileSubmit = (e) => {
         e.preventDefault();

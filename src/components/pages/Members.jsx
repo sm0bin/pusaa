@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import useLoadDataPrivate from '../../hooks/useLoadDataPrivate';
+import { useEffect, useState } from 'react';
+// import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 const Members = () => {
+    // const axiosPrivate = useAxiosPrivate();
     // const [members, isPending, refetch, error] = useLoadDataPrivate('/users', 'members');
     // const [displayMembers, setDisplayMembers] = useState(members?.users);
 
     const [members, setMembers] = useState([]);
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER}/users`, { withCredentials: true })
+        axios.get(`${import.meta.env.VITE_SERVER}/users`)
             .then((res) => {
                 console.log(res.data.users);
                 if (res.status === 200) {
